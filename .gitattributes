@@ -1,1 +1,17 @@
 * text=auto !eol
+/AUTHORS -text
+/COPYING -text
+/ChangeLog -text
+/LICENSE -text
+/Makefile.in -text
+/NEWS -text
+/README.ProfileServ -text
+/RELNOTES -text
+/configure -text
+/configure.in -text
+/install-sh -text
+/modconfig.h.in -text
+/modconfigwin32.h -text
+/profileserv.c -text
+/profileserv.h -text
+/profileserv_help.c -text
