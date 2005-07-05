@@ -46,7 +46,7 @@ const char *pfs_about[] = {
 */
 static bot_cmd pfs_commands[]=
 {
-	{"VIEW",		pfs_cmd_view,		1,	0,	pfs_help_view},
+	{"PROFILE",		pfs_cmd_profile,	1,	0,	pfs_help_profile},
 	{"REALNAME",		pfs_cmd_realname,	1,	0,	pfs_help_realname},
 	{"BIRTHDAY",		pfs_cmd_birthday,	3,	0,	pfs_help_birthday},
 	{"AGE",			pfs_cmd_age,		1,	0,	pfs_help_age},
@@ -223,7 +223,7 @@ void profile_report( CmdParams *cmdparams, const char *fmt, ... )
 /*
  * View Nicknames Profile
 */
-int pfs_cmd_view (CmdParams *cmdparams)
+int pfs_cmd_profile (CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -343,7 +343,7 @@ int pfs_cmd_birthday (CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
-	int d, m, y;
+	char *buf;
 	
 	SET_SEGV_LOCATION();
 	if( ( !ProfileServ.enable && !cmdparams->channel ) || ( !ProfileServ.enableprofilechan && cmdparams->channel ) )
@@ -353,25 +353,19 @@ int pfs_cmd_birthday (CmdParams *cmdparams)
 		profile_report( cmdparams, "You must be Identified for your nickname to add data to the profile" );
 		return NS_SUCCESS;
 	}
-	d = atoi(cmdparams->av[0]);
-	m = atoi(cmdparams->av[1]);
-	y = atoi(cmdparams->av[2]);
-	if ( d < 1 || d > 31 || m < 1 || m > 12 )
-	{
-		profile_report( cmdparams, "Invalid Date Specifed (must be in the format 'dd mm yy')" );
-		return NS_SUCCESS;
-	}
 	pu = ns_calloc( sizeof( ProfileUser ) );
 	pd = ns_calloc( sizeof( ProfileData ) );
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
 	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "BDT" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
-	ircsnprintf( pd->typedata, PFS_TEXTSIZE, "%d %s %d", d , (m == 1) ? "Jan" : (m == 2) ? "Feb" : (m == 3) ? "Mar" : (m == 4) ? "Apr" : (m == 5) ? "May" : (m == 6) ? "Jun" : (m == 7) ? "Jul" : (m == 8) ? "Aug" : (m == 9) ? "Sep" : (m == 10) ? "Oct" : (m == 11) ? "Nov" : "Dec", y);
+	strlcpy( pd->typedata, buf, PFS_TEXTSIZE);
 	DBAStore( "UserData", pd->typenick, ( void * )pd, sizeof( ProfileData ) );
 	profile_report( cmdparams, "Birthday changed to : %s", pd->typedata );
+	ns_free( buf )
 	ns_free( pu );
 	ns_free( pd );
 	return NS_SUCCESS;
@@ -488,6 +482,7 @@ int pfs_cmd_maritalstatus (CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
+	char *buf;
 	
 	SET_SEGV_LOCATION();
 	if( ( !ProfileServ.enable && !cmdparams->channel ) || ( !ProfileServ.enableprofilechan && cmdparams->channel ) )
@@ -503,56 +498,13 @@ int pfs_cmd_maritalstatus (CmdParams *cmdparams)
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
 	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "MST" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
-	switch (cmdparams->av[0][0])
-	{
-		case 's':
-		case 'S':
-			strlcpy( pd->typedata, "Single", PFS_TEXTSIZE );
-			break;
-		case 'm':
-		case 'M':
-			strlcpy( pd->typedata, "Married", PFS_TEXTSIZE );
-			break;
-		case 'd':
-		case 'D':
-			strlcpy( pd->typedata, "Divorced", PFS_TEXTSIZE );
-			break;
-		case 'a':
-		case 'A':
-			strlcpy( pd->typedata, "Available", PFS_TEXTSIZE );
-			break;
-		case 'u':
-		case 'U':
-			strlcpy( pd->typedata, "Unavailable", PFS_TEXTSIZE );
-			break;
-		case 'w':
-		case 'W':
-			strlcpy( pd->typedata, "Getting rid of the Witch", PFS_TEXTSIZE );
-			break;
-		case 'b':
-		case 'B':
-			strlcpy( pd->typedata, "Getting rid of the Hubastard", PFS_TEXTSIZE );
-			break;
-		case 't':
-		case 'T':
-			strlcpy( pd->typedata, "Too Bloody Picky", PFS_TEXTSIZE );
-			break;
-		case 'p':
-		case 'P':
-			strlcpy( pd->typedata, "Waiting (because there is no Price Charming/Sleeping Beauty)", PFS_TEXTSIZE );
-			break;
-		default:
-			pd->typedata[0] = '\0';
-			break;
-	}
-	if( strlen( pd->typedata ) < 1 ) {
-		profile_report( cmdparams, "Invalid Marital Status Specified");
-	} else {
-		DBAStore( "UserData", pd->typenick, ( void * )pd, sizeof( ProfileData ) );
-		profile_report( cmdparams, "Marital Status changed to : %s", pd->typedata );
-	}
+	strlcpy( pd->typedata, buf, PFS_TEXTSIZE);
+	DBAStore( "UserData", pd->typenick, ( void * )pd, sizeof( ProfileData ) );
+	profile_report( cmdparams, "Marital Status changed to : %s", pd->typedata );
+	ns_free( buf )
 	ns_free( pu );
 	ns_free( pd );
 	return NS_SUCCESS;
