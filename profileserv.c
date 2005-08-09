@@ -130,7 +130,7 @@ int ModSynch (void)
 int ModInit( void )
 {
 	ModuleConfig (pfs_settings);
-	AddTimer (TIMER_TYPE_DAILY, pfs_expire_profiles, "pfs_expire_profiles", 0);
+	AddTimer (TIMER_TYPE_DAILY, pfs_expire_profiles, "pfs_expire_profiles", 0, NULL);
 	return NS_SUCCESS;
 }
 
@@ -714,7 +714,7 @@ void pfs_delete_profile ( CmdParams *cmdparams, ProfileUser *pu )
 /*
  * Expire Old Profiles Timer
 */
-int pfs_expire_profiles(void) 
+int pfs_expire_profiles(void *userptr) 
 {
 	SET_SEGV_LOCATION();
 	if( ProfileServ.expiredays > 0 )

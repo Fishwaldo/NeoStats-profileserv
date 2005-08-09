@@ -79,6 +79,6 @@ int pfs_cmd_hobbies (CmdParams *cmdparams);
 int pfs_cmd_general (CmdParams *cmdparams);
 int pfs_cmd_del (CmdParams *cmdparams);
 void pfs_delete_profile ( CmdParams *cmdparams, ProfileUser *pu );
-int pfs_expire_profiles(void);
+int pfs_expire_profiles(void*);
 int expireoldprofiles(void *data, int size);
 int pfs_UmodeUser (CmdParams *cmdparams);
