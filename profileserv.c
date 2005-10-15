@@ -56,7 +56,7 @@ static bot_cmd pfs_commands[]=
 	{"HOBBIES",		pfs_cmd_hobbies,	1,	0,	pfs_help_hobbies},
 	{"GENERAL",		pfs_cmd_general,	2,	0,	pfs_help_general},
 	{"DEL",			pfs_cmd_del,		1,	0,	pfs_help_del},
-	{NULL,			NULL,			0, 	0,	NULL}
+	NS_CMD_END()
 };
 
 static bot_setting pfs_settings[]=
@@ -66,7 +66,7 @@ static bot_setting pfs_settings[]=
 	{"ENABLEPROFILECHAN",	&ProfileServ.enableprofilechan,	SET_TYPE_BOOLEAN,	0,	0,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_enableprofilechan,	pfs_set_enablechan,	(void *)0 },
 	{"PROFILECHANNAME",	&ProfileServ.profilechan,	SET_TYPE_CHANNEL,	0,	MAXCHANLEN,	NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_profilechan,	pfs_set_profilechan,	(void *)"#Profile" },
 	{"EXPIREDAYS",		&ProfileServ.expiredays,	SET_TYPE_INT,		0,	100000,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_expiredays,	NULL,			(void *)30 },
-	{NULL,			NULL,				0,			0,	0,		0,			NULL,	NULL,				NULL, 			NULL },
+	NS_SETTING_END()
 };
 
 /*
@@ -90,7 +90,7 @@ ModuleInfo module_info = {
 */
 ModuleEvent module_events[] = {
 	{EVENT_UMODE,	pfs_UmodeUser},
-	{EVENT_NULL,	NULL}
+	NS_EVENT_END()
 };
 
 /** BotInfo */
@@ -146,7 +146,7 @@ int ModFini( void )
 /*
  * Enable/Disable Global Exclusions
 */
-int pfs_set_exclusions( CmdParams *cmdparams, SET_REASON reason )
+int pfs_set_exclusions( const CmdParams *cmdparams, SET_REASON reason )
 {
 	if( reason == SET_LOAD || reason == SET_CHANGE )
 		SetAllEventFlags( EVENT_FLAG_USE_EXCLUDE, ProfileServ.exclusions );
@@ -156,7 +156,7 @@ int pfs_set_exclusions( CmdParams *cmdparams, SET_REASON reason )
 /*
  * Profile Channel Enable/Disable
 */
-int pfs_set_enablechan (CmdParams *cmdparams, SET_REASON reason) 
+int pfs_set_enablechan (const CmdParams *cmdparams, SET_REASON reason) 
 {
 	if (!ProfileServ.profilechan)
 		return NS_SUCCESS;
@@ -179,7 +179,7 @@ int pfs_set_enablechan (CmdParams *cmdparams, SET_REASON reason)
 /*
  * Profile Channel Setting
 */
-int pfs_set_profilechan (CmdParams *cmdparams, SET_REASON reason) 
+int pfs_set_profilechan (const CmdParams *cmdparams, SET_REASON reason) 
 {
 	if (!ProfileServ.enableprofilechan)
 		return NS_SUCCESS;
@@ -206,7 +206,7 @@ int pfs_set_profilechan (CmdParams *cmdparams, SET_REASON reason)
  */
 static char profile_report_buf[BUFSIZE];
 
-void profile_report( CmdParams *cmdparams, const char *fmt, ... )
+void profile_report( const CmdParams *cmdparams, const char *fmt, ... )
 {
 	va_list ap;
 
@@ -223,7 +223,7 @@ void profile_report( CmdParams *cmdparams, const char *fmt, ... )
 /*
  * View Nicknames Profile
 */
-int pfs_cmd_profile (CmdParams *cmdparams)
+int pfs_cmd_profile (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -304,7 +304,7 @@ int pfs_cmd_profile (CmdParams *cmdparams)
 /*
  * Set Real Name
 */
-int pfs_cmd_realname (CmdParams *cmdparams)
+int pfs_cmd_realname (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -339,7 +339,7 @@ int pfs_cmd_realname (CmdParams *cmdparams)
 /*
  * Set Birthday
 */
-int pfs_cmd_birthday (CmdParams *cmdparams)
+int pfs_cmd_birthday (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -374,7 +374,7 @@ int pfs_cmd_birthday (CmdParams *cmdparams)
 /*
  * Set Age
 */
-int pfs_cmd_age (CmdParams *cmdparams)
+int pfs_cmd_age (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -413,7 +413,7 @@ int pfs_cmd_age (CmdParams *cmdparams)
 /*
  * Set Gender
 */
-int pfs_cmd_gender (CmdParams *cmdparams)
+int pfs_cmd_gender (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -478,7 +478,7 @@ int pfs_cmd_gender (CmdParams *cmdparams)
 /*
  * Set Marital Status
 */
-int pfs_cmd_maritalstatus (CmdParams *cmdparams)
+int pfs_cmd_maritalstatus (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -513,7 +513,7 @@ int pfs_cmd_maritalstatus (CmdParams *cmdparams)
 /*
  * Set Location
 */
-int pfs_cmd_location (CmdParams *cmdparams)
+int pfs_cmd_location (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -548,7 +548,7 @@ int pfs_cmd_location (CmdParams *cmdparams)
 /*
  * Set Hobbies
 */
-int pfs_cmd_hobbies (CmdParams *cmdparams)
+int pfs_cmd_hobbies (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -583,7 +583,7 @@ int pfs_cmd_hobbies (CmdParams *cmdparams)
 /*
  * Set General Information Lines
 */
-int pfs_cmd_general (CmdParams *cmdparams)
+int pfs_cmd_general (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	ProfileData *pd;
@@ -624,7 +624,7 @@ int pfs_cmd_general (CmdParams *cmdparams)
 /*
  * Delete Nicknames Profile Command
 */
-int pfs_cmd_del (CmdParams *cmdparams)
+int pfs_cmd_del (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	
@@ -663,7 +663,7 @@ int pfs_cmd_del (CmdParams *cmdparams)
  * if cmdparams is NULL then delete called
  * from expire procedure
 */
-void pfs_delete_profile ( CmdParams *cmdparams, ProfileUser *pu )
+void pfs_delete_profile ( const CmdParams *cmdparams, ProfileUser *pu )
 {
 	ProfileData *pd;
 	
@@ -740,7 +740,7 @@ int expireoldprofiles(void *data, int size)
 /*
  * User Mode Change
 */
-int pfs_UmodeUser (CmdParams *cmdparams)
+int pfs_UmodeUser (const CmdParams *cmdparams)
 {
 	ProfileUser *pu;
 	
