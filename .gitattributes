@@ -14,4 +14,5 @@
 /modconfigwin32.h -text
 /profileserv.c -text
 /profileserv.h -text
+/profileserv.vcproj -text
 /profileserv_help.c -text
