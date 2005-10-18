@@ -149,10 +149,7 @@
 			RelativePath=".\ChangeLog">
 		</File>
 		<File
-			RelativePath=".\configure.in">
-		</File>
-		<File
-			RelativePath=".\Makefile.in">
+			RelativePath=".\License">
 		</File>
 		<File
 			RelativePath=".\README.ProfileServ">
