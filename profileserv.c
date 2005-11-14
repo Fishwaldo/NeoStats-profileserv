@@ -239,7 +239,7 @@ int pfs_cmd_profile (const CmdParams *cmdparams)
 	pu = ns_calloc( sizeof( ProfileUser ) );
 	pd = ns_calloc( sizeof( ProfileData ) );
 	strlcpy( nicklower, cmdparams->av[0], MAXNICK );
-	if( DBAFetch( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) == NS_FAILURE )
+	if( DBAFetch( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) == NS_FAILURE )
 	{
 		profile_report( cmdparams, "No Profile exists for specified nickname" );
 	}
@@ -323,7 +323,7 @@ int pfs_cmd_realname (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "RNT" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
@@ -358,7 +358,7 @@ int pfs_cmd_birthday (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "BDT" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
@@ -399,7 +399,7 @@ int pfs_cmd_age (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	strlcpy( pd->typenick, "AGE" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
 	ircsnprintf( pd->typedata, PFS_TEXTSIZE, "%d", userage);
@@ -431,7 +431,7 @@ int pfs_cmd_gender (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	strlcpy( pd->typenick, "SEX" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
 	switch (cmdparams->av[0][0])
@@ -497,7 +497,7 @@ int pfs_cmd_maritalstatus (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "MST" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
@@ -532,7 +532,7 @@ int pfs_cmd_location (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "LOC" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
@@ -567,7 +567,7 @@ int pfs_cmd_hobbies (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 0);
 	strlcpy( pd->typenick, "HOB" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, nicklower, PFS_TYPENICKSIZE );
@@ -607,7 +607,7 @@ int pfs_cmd_general (const CmdParams *cmdparams)
 	strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
 	strlcpy( nicklower, cmdparams->source->name , MAXNICK );
 	pu->lastseen = me.now;
-	DBAStore( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
+	DBAStore( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) );
 	buf= joinbuf(cmdparams->av, cmdparams->ac, 1);
 	strlcpy( pd->typenick, "GT" , PFS_TYPENICKSIZE );
 	strlcat( pd->typenick, cmdparams->av[0] , PFS_TYPENICKSIZE );
@@ -644,7 +644,7 @@ int pfs_cmd_del (const CmdParams *cmdparams)
 	}
 	pu = ns_calloc( sizeof( ProfileUser ) );
 	strlcpy( nicklower, cmdparams->av[0], MAXNICK );
-	if( DBAFetch( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) == NS_FAILURE )
+	if( DBAFetch( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) == NS_FAILURE )
 	{
 		profile_report( cmdparams, "No Profile exists for specified nickname" );
 	}
@@ -749,7 +749,7 @@ int pfs_UmodeUser (const CmdParams *cmdparams)
 	{
 		pu = ns_calloc( sizeof( ProfileUser ) );
 		strlcpy( nicklower, cmdparams->source->name , MAXNICK );
-		if( DBAFetch( "UserList", strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) != NS_FAILURE )
+		if( DBAFetch( "UserList", ns_strlwr(nicklower), ( void * )pu, sizeof( ProfileUser ) ) != NS_FAILURE )
 		{
 			/* Profile Exists so update last seen time */
 			strlcpy( pu->nick, cmdparams->source->name , MAXNICK );
