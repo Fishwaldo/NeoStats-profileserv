@@ -20,6 +20,8 @@
 ** $Id$
 */
 
+#include MODULECONFIG
+
 /* Defines */
 #define PFS_TYPESIZE		3			/* Type Field Size */
 #define PFS_TEXTSIZE		300			/* Text Field Size */
