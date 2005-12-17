@@ -64,7 +64,7 @@ static bot_setting pfs_settings[]=
 	{"EXCLUSIONS",		&ProfileServ.exclusions,	SET_TYPE_BOOLEAN,	0,	0,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_exclusions,	pfs_set_exclusions,	(void *)1 },
 	{"ENABLE",		&ProfileServ.enable,		SET_TYPE_BOOLEAN,	0,	0,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_enable,		NULL,			(void *)0 },
 	{"ENABLEPROFILECHAN",	&ProfileServ.enableprofilechan,	SET_TYPE_BOOLEAN,	0,	0,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_enableprofilechan,	pfs_set_enablechan,	(void *)0 },
-	{"PROFILECHANNAME",	&ProfileServ.profilechan,	SET_TYPE_CHANNEL,	0,	MAXCHANLEN,	NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_profilechan,	pfs_set_profilechan,	(void *)"#Profile" },
+	{"PROFILECHANNAME",	&ProfileServ.profilechan,	SET_TYPE_CHANNEL,	0,	MAXCHANLEN,	NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_profilechanname,	pfs_set_profilechan,	(void *)"#Profile" },
 	{"EXPIREDAYS",		&ProfileServ.expiredays,	SET_TYPE_INT,		0,	100000,		NS_ULEVEL_ADMIN,	NULL,	pfs_help_set_expiredays,	NULL,			(void *)30 },
 	NS_SETTING_END()
 };

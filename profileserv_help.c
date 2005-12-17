@@ -41,8 +41,8 @@ const char *pfs_help_set_enableprofilechan[] = {
 	NULL
 };
 
-const char *pfs_help_set_profilechan[] = {
-	"\2PROFILECHAN <#Channel>\2",
+const char *pfs_help_set_profilechanname[] = {
+	"\2PROFILECHANNAME <#Channel>\2",
 	"Set Channel ProfileServ accepts commands from in channel",
 	NULL
 };

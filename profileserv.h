@@ -52,7 +52,7 @@ typedef struct ProfileData {
 extern const char *pfs_help_set_exclusions[];
 extern const char *pfs_help_set_enable[];
 extern const char *pfs_help_set_enableprofilechan[];
-extern const char *pfs_help_set_profilechan[];
+extern const char *pfs_help_set_profilechanname[];
 extern const char *pfs_help_set_expiredays[];
 extern const char *pfs_help_profile[];
 extern const char *pfs_help_realname[];
