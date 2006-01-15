@@ -6,6 +6,8 @@
 /Makefile.in -text
 /NEWS -text
 /README.ProfileServ -text
+/README.ProfileServ.html -text
+/README.ProfileServ.xml -text
 /RELNOTES -text
 /configure -text
 /configure.in -text
