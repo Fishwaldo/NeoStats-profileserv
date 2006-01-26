@@ -1,5 +1,5 @@
 /* ProfileServ - User Profile Service - NeoStats Addon Module
-** Copyright (c) 2005 Justin Hammond, Mark Hetherington, DeadNotBuried
+** Copyright (c) 2006 Justin Hammond, Mark Hetherington, DeadNotBuried
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ char nicklower[MAXNICK];
 
 /** Copyright info */
 const char *pfs_copyright[] = {
-	"Copyright (c) 2005, NeoStats",
+	"Copyright (c) 2006, NeoStats",
 	"http://www.neostats.net/",
 	NULL};
 
