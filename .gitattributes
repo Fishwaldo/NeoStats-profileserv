@@ -3,12 +3,12 @@
 /COPYING -text
 /ChangeLog -text
 /LICENSE -text
+/Makefile.am -text
 /Makefile.in -text
 /NEWS -text
 /README.ProfileServ -text
-/README.ProfileServ.html -text
-/README.ProfileServ.xml -text
 /RELNOTES -text
+/aclocal.m4 -text
 /configure -text
 /configure.in -text
 /install-sh -text

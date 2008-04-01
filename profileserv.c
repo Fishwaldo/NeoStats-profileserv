@@ -1,5 +1,5 @@
 /* ProfileServ - User Profile Service - NeoStats Addon Module
-** Copyright (c) 2006 Justin Hammond, Mark Hetherington, DeadNotBuried
+** Copyright (c) 2006-2008 Justin Hammond, Mark Hetherington, DeadNotBuried
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ char nicklower[MAXNICK];
 
 /** Copyright info */
 const char *pfs_copyright[] = {
-	"Copyright (c) 2006, NeoStats",
+	"Copyright (c) 2006-2008, NeoStats",
 	"http://www.neostats.net/",
 	NULL};
 
@@ -116,7 +116,7 @@ int ModSynch (void)
 	if (!pfs_bot)
 		return NS_FAILURE;
 	if (ProfileServ.enableprofilechan) {
-		irc_join (pfs_bot, ProfileServ.profilechan, "+o");
+		irc_join (pfs_bot, ProfileServ.profilechan, me.servicescmode);
 		irc_chanalert (pfs_bot, "Profile Channel Now Available in %s", ProfileServ.profilechan);
 	} else {
 		irc_chanalert (pfs_bot, "Profile Channel Not Enabled");
@@ -164,7 +164,7 @@ int pfs_set_enablechan (const CmdParams *cmdparams, SET_REASON reason)
 	{
 		if (ProfileServ.enableprofilechan) 
 		{
-			irc_join (pfs_bot, ProfileServ.profilechan, "+o");
+			irc_join (pfs_bot, ProfileServ.profilechan, me.servicescmode);
 			irc_chanalert (pfs_bot, "Profile functions now available in %s", ProfileServ.profilechan);
 			return NS_SUCCESS;
 		} else {
@@ -193,7 +193,7 @@ int pfs_set_profilechan (const CmdParams *cmdparams, SET_REASON reason)
 	}
 	if (reason == SET_CHANGE) 
 	{
-		irc_join (pfs_bot, ProfileServ.profilechan, "+o");
+		irc_join (pfs_bot, ProfileServ.profilechan, me.servicescmode);
 		irc_chanalert (pfs_bot, "Profile functions now available in %s", ProfileServ.profilechan);
 		return NS_SUCCESS;
 	}
