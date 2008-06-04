@@ -12,9 +12,13 @@
 /configure.in -text
 /install-sh -text
 /modconfig.h.in -text
-/modconfigwin32.h -text
 /profileserv.c -text
 /profileserv.h -text
+/profileserv.sln -text
 /profileserv.vcproj -text
 /profileserv_help.c -text
 /pulse.xml -text
+win32/ProfileServ.qsp -text
+win32/buildwin32snap.bat -text
+win32/modconfigwin32.h -text
+win32/neostatsversion.rc -text
