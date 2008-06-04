@@ -1,6 +1,8 @@
 ProfileServ Module for NeoStats Changelog.
 Fish (F), Mark (M), DeadNotBuried (D)
 ==============================================================================
+3.0.1 (F)
+ - Bump Version (F)
 3.0.0
  - Autoconf ProfileServ (F)
  - Fix Compile error on X86-64 (F)
