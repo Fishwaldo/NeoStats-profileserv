@@ -20,8 +20,7 @@
 ** $Id$
 */
 
-#include "neostats.h"    /* Required for bot support */
-#include "profileserv.h"
+#include "neostats.h"
 
 const char *pfs_help_set_exclusions[] = {
 	"\2EXCLUSIONS <ON|OFF>\2",

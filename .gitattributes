@@ -6,7 +6,6 @@
 /Makefile.am -text
 /Makefile.in -text
 /NEWS -text
-/README.ProfileServ -text
 /RELNOTES -text
 /aclocal.m4 -text
 /configure -text

@@ -28,7 +28,7 @@
 #define PFS_TYPENICKSIZE	PFS_TYPESIZE+MAXNICK	/* Type and Nick Key Field Size */
 
 /* Variables And Structs */
-Bot *pfs_bot;
+extern Bot *pfs_bot;
 
 struct ProfileServ {
 	int exclusions;
@@ -37,6 +37,7 @@ struct ProfileServ {
 	char profilechan[MAXCHANLEN];
 	int expiredays;
 } ProfileServ;
+
 
 typedef struct ProfileUser {
 	char nick[MAXNICK];

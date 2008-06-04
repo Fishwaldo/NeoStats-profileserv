@@ -106,6 +106,10 @@ static BotInfo pfs_botinfo =
 	pfs_settings,
 };
 
+Bot *pfs_bot;
+
+
+
 /*
  * Online event processing
 */
